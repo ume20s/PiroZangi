@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <Authors>ume20s</Authors>
+    <Company>ume20studio</Company>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="image\captain.png" />
+    <None Remove="image\gacchan.png" />
+    <None Remove="image\piroko.png" />
+    <None Remove="image\pirosuke.png" />
+    <None Remove="image\plain.png" />
+    <None Remove="image\tencho.png" />
+    <None Remove="image\yuimarru.png" />
+    <None Remove="image\zangi.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="image\captain.png" />
+    <EmbeddedResource Include="image\gacchan.png" />
+    <EmbeddedResource Include="image\piroko.png" />
+    <EmbeddedResource Include="image\pirosuke.png" />
+    <EmbeddedResource Include="image\plain.png" />
+    <EmbeddedResource Include="image\tencho.png" />
+    <EmbeddedResource Include="image\yuimarru.png" />
+    <EmbeddedResource Include="image\zangi.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+  </ItemGroup>
+
+</Project>
