@@ -14,8 +14,6 @@
 
   <ItemGroup>
     <None Remove="image\captain.png" />
-    <None Remove="image\gacchan.png" />
-    <None Remove="image\piroko.png" />
     <None Remove="image\pirosuke.png" />
     <None Remove="image\plain.png" />
     <None Remove="image\tencho.png" />
@@ -25,8 +23,6 @@
 
   <ItemGroup>
     <EmbeddedResource Include="image\captain.png" />
-    <EmbeddedResource Include="image\gacchan.png" />
-    <EmbeddedResource Include="image\piroko.png" />
     <EmbeddedResource Include="image\pirosuke.png" />
     <EmbeddedResource Include="image\plain.png" />
     <EmbeddedResource Include="image\tencho.png" />

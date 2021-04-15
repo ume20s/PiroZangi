@@ -10,50 +10,123 @@ namespace PiroZangi
 {
     public partial class MainPage : ContentPage
     {
-        private int counter;
-        private bool running;
+        private int remain;                 // 残り時間
+        private int character;              // 出現キャラクタ
+        private int interval;               // ザンギ出現間隔
+        private int intervalcnt;            // 出現時間計数カウンタ
+        private bool running;               // ゲームやってるよフラグ
+        private int alive = 0;              // ザンギ出現穴番号
+//        private bool hit = false;           // 叩かれた？
+        private Image[] _images;            // イメージコントロール配列
+        System.Random r = new System.Random();  // 乱数発生用変数
 
         public MainPage()
         {
-            running = false;
+            int i;                          // 有象無象
 
             InitializeComponent();
+            running = false;
 
-            g11.Source = ImageSource.FromResource("PiroZangi.image.plain.png"); ;
-            g12.Source = ImageSource.FromResource("PiroZangi.image.plain.png"); ;
-            g13.Source = ImageSource.FromResource("PiroZangi.image.plain.png"); ;
-            g21.Source = ImageSource.FromResource("PiroZangi.image.zangi.png"); ;
-            g22.Source = ImageSource.FromResource("PiroZangi.image.plain.png"); ;
-            g23.Source = ImageSource.FromResource("PiroZangi.image.plain.png"); ;
-            g31.Source = ImageSource.FromResource("PiroZangi.image.plain.png"); ;
-            g32.Source = ImageSource.FromResource("PiroZangi.image.plain.png"); ;
-            g33.Source = ImageSource.FromResource("PiroZangi.image.plain.png"); ;
+            // イメージ配列の格納
+            _images = new Image[9];
+            _images[0] = g0;
+            _images[1] = g1;
+            _images[2] = g2;
+            _images[3] = g3;
+            _images[4] = g4;
+            _images[5] = g5;
+            _images[6] = g6;
+            _images[7] = g7;
+            _images[8] = g8;
 
+            // イメージ画像の初期化
+            for(i=0; i<9; i++) {
+                _images[i].Source = ImageSource.FromResource("PiroZangi.image.plain.png");
+            }
+
+            // タイマー処理
             Device.StartTimer(TimeSpan.FromMilliseconds(10), () =>
             {
-                if (running == false)
-                {
+                // 走ってなきゃ処理しない
+                if (running == false) {
                     return true;
                 }
-                counter--;
-                countBtn.Text = (counter/100).ToString() + "." + (counter%100).ToString("00");
-                if(counter == 0)
+
+                // 時間減算
+                remain--;
+                countBtn.Text = (remain / 100).ToString() + "." + (remain % 100).ToString("00");
+
+                // 時間内なら
+                if (remain > 0)
                 {
+                    intervalcnt--;
+                    if (intervalcnt <= 0)
+                    {
+                        // 穴を戻して次の出現場所を選択
+                        _images[alive].Source = ImageSource.FromResource("PiroZangi.image.plain.png");
+                        alive = r.Next(0, 9);
+
+                        // キャラクタ選択
+                        character = r.Next(0, 100);
+                        if(character < 87) {
+                            character = 0;
+                            _images[alive].Source = ImageSource.FromResource("PiroZangi.image.zangi.png");
+                        } else if(character < 92) {
+                            character = 1;
+                            _images[alive].Source = ImageSource.FromResource("PiroZangi.image.pirosuke.png");
+                        } else if(character < 97) {
+                            character = 2;
+                            _images[alive].Source = ImageSource.FromResource("PiroZangi.image.tencho.png");
+                        } else if(character < 99) {
+                            character = 3;
+                            _images[alive].Source = ImageSource.FromResource("PiroZangi.image.yuimarru.png");
+                        } else {
+                            character = 4;
+                            _images[alive].Source = ImageSource.FromResource("PiroZangi.image.captain.png");
+                        }
+
+                        // 時間間隔調整
+                        if (interval >= 70) {
+                            interval -= 5;
+
+                        } else {
+                            interval -= 2;
+                        }
+                        if (interval <= 8) interval = 8;
+                        intervalcnt = interval;
+                    }
+                } else { // 時間をオーバーしたらそれで試合終了ですよ
+                    _images[alive].Source = ImageSource.FromResource("PiroZangi.image.plain.png");
                     countBtn.Text = "も う １ 回 ？";
                     running = false;
                 }
+
                 return true;
             });
         }
 
+        // ゲーム開始ボタン
         void OnButtonClicked(object sender, EventArgs e)
         {
-            if (running == true)
-            {
+            // 走ってたら無視
+            if (running == true) {
                 return;
             }
-            counter = 300;
+
+            // 走ってなかったらもろもろの初期値を設定して走る
+            remain = 3000;
+            interval = 150;
+            intervalcnt = 0;
+            alive = r.Next(0, 9);
+            character = 0;
+            _images[alive].Source = ImageSource.FromResource("PiroZangi.image.zangi.png");
             running = true;
+        }
+
+        // イメージがクリックされたら
+        void OnImageClicked(object sender, EventArgs e)
+        {
+
         }
     }
 }
