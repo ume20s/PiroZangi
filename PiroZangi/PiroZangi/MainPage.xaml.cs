@@ -45,6 +45,27 @@ namespace PiroZangi
                 _images[i].Source = ImageSource.FromResource("PiroZangi.image.plain.png");
             }
 
+            // タッチイベントの実装
+            var gr = new TapGestureRecognizer();
+            gr.Tapped += (sender, e) => {
+                if((((Image)sender).TabIndex == alive) && (hit == false)) {
+                    hit = true;
+                    switch(character) {
+                        case 0:
+                            score += 100;
+                            _images[alive].Source = ImageSource.FromResource("PiroZangi.image.zangi_p.png");
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                scoreLabel.Text = "Score: " + score.ToString("00000");
+            };
+            for(i=0; i<9; i++) {
+                _images[i].GestureRecognizers.Add(gr);
+            }
+
+
             // タイマー処理
             Device.StartTimer(TimeSpan.FromMilliseconds(10), () =>
             {
@@ -88,14 +109,15 @@ namespace PiroZangi
                         }
 
                         // 時間間隔調整
-                        interval -= 4;
-                        if (interval <= 15) interval = 15;
+                        interval -= 3;
+                        if (interval <= 10) interval = 10;
                         intervalcnt = interval;
                     }
                 } else { // 時間をオーバーしたらそれで試合終了ですよ
                     _images[alive].Source = ImageSource.FromResource("PiroZangi.image.plain.png");
                     countBtn.Text = "も う １ 回 ？";
                     running = false;
+                    hit = false;
                 }
 
                 return true;
@@ -114,7 +136,7 @@ namespace PiroZangi
             remain = 3000;
             score = 0;
             hit = false;
-            interval = 140;
+            interval = 130;
             intervalcnt = 0;
             alive = r.Next(0, 9);
             character = 0;
