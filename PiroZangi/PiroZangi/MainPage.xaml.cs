@@ -11,12 +11,13 @@ namespace PiroZangi
     public partial class MainPage : ContentPage
     {
         private int remain;                 // 残り時間
+        private int score;                  // スコア
         private int character;              // 出現キャラクタ
         private int interval;               // ザンギ出現間隔
         private int intervalcnt;            // 出現時間計数カウンタ
         private bool running;               // ゲームやってるよフラグ
         private int alive = 0;              // ザンギ出現穴番号
-//        private bool hit = false;           // 叩かれた？
+        private bool hit = false;           // 叩かれた？
         private Image[] _images;            // イメージコントロール配列
         System.Random r = new System.Random();  // 乱数発生用変数
 
@@ -64,35 +65,31 @@ namespace PiroZangi
                     {
                         // 穴を戻して次の出現場所を選択
                         _images[alive].Source = ImageSource.FromResource("PiroZangi.image.plain.png");
-                        alive = r.Next(0, 9);
+                        hit = false;
+                        alive = (alive + r.Next(1, 8)) % 9;
 
                         // キャラクタ選択
                         character = r.Next(0, 100);
-                        if(character < 87) {
+                        if(character < 82) {
                             character = 0;
                             _images[alive].Source = ImageSource.FromResource("PiroZangi.image.zangi.png");
-                        } else if(character < 92) {
+                        } else if(character < 87) {
                             character = 1;
-                            _images[alive].Source = ImageSource.FromResource("PiroZangi.image.pirosuke.png");
-                        } else if(character < 97) {
+                            _images[alive].Source = ImageSource.FromResource("PiroZangi.image.piro.png");
+                        } else if(character < 94) {
                             character = 2;
-                            _images[alive].Source = ImageSource.FromResource("PiroZangi.image.tencho.png");
+                            _images[alive].Source = ImageSource.FromResource("PiroZangi.image.ten.png");
                         } else if(character < 99) {
                             character = 3;
-                            _images[alive].Source = ImageSource.FromResource("PiroZangi.image.yuimarru.png");
+                            _images[alive].Source = ImageSource.FromResource("PiroZangi.image.yui.png");
                         } else {
                             character = 4;
-                            _images[alive].Source = ImageSource.FromResource("PiroZangi.image.captain.png");
+                            _images[alive].Source = ImageSource.FromResource("PiroZangi.image.cap.png");
                         }
 
                         // 時間間隔調整
-                        if (interval >= 70) {
-                            interval -= 5;
-
-                        } else {
-                            interval -= 2;
-                        }
-                        if (interval <= 8) interval = 8;
+                        interval -= 4;
+                        if (interval <= 15) interval = 15;
                         intervalcnt = interval;
                     }
                 } else { // 時間をオーバーしたらそれで試合終了ですよ
@@ -115,18 +112,14 @@ namespace PiroZangi
 
             // 走ってなかったらもろもろの初期値を設定して走る
             remain = 3000;
-            interval = 150;
+            score = 0;
+            hit = false;
+            interval = 140;
             intervalcnt = 0;
             alive = r.Next(0, 9);
             character = 0;
             _images[alive].Source = ImageSource.FromResource("PiroZangi.image.zangi.png");
             running = true;
-        }
-
-        // イメージがクリックされたら
-        void OnImageClicked(object sender, EventArgs e)
-        {
-
         }
     }
 }

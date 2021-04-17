@@ -44,15 +44,15 @@
             <Label x:Name="highscoreLabel" Grid.Row="0" Grid.Column="1" 
                    FontSize="16" Margin="5" BackgroundColor="#FFA2E7" Text = " HighScore:00000" />
         </Grid>
-        <Image Grid.Column="1" Grid.Row="1" x:Name="g0" />
-        <Image Grid.Column="2" Grid.Row="1" x:Name="g1" />
-        <Image Grid.Column="3" Grid.Row="1" x:Name="g2" />
-        <Image Grid.Column="1" Grid.Row="2" x:Name="g3" />
-        <Image Grid.Column="2" Grid.Row="2" x:Name="g4" />
-        <Image Grid.Column="3" Grid.Row="2" x:Name="g5" />
-        <Image Grid.Column="1" Grid.Row="3" x:Name="g6" />
-        <Image Grid.Column="2" Grid.Row="3" x:Name="g7" />
-        <Image Grid.Column="3" Grid.Row="3" x:Name="g8" />
+        <Image Grid.Column="1" Grid.Row="1" x:Name="g0" TabIndex="0" />
+        <Image Grid.Column="2" Grid.Row="1" x:Name="g1" TabIndex="1" />
+        <Image Grid.Column="3" Grid.Row="1" x:Name="g2" TabIndex="2" />
+        <Image Grid.Column="1" Grid.Row="2" x:Name="g3" TabIndex="3" />
+        <Image Grid.Column="2" Grid.Row="2" x:Name="g4" TabIndex="4" />
+        <Image Grid.Column="3" Grid.Row="2" x:Name="g5" TabIndex="5" />
+        <Image Grid.Column="1" Grid.Row="3" x:Name="g6" TabIndex="6" />
+        <Image Grid.Column="2" Grid.Row="3" x:Name="g7" TabIndex="7" />
+        <Image Grid.Column="3" Grid.Row="3" x:Name="g8" TabIndex="8" />
         <Button Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3"
                 x:Name="countBtn" FontSize="22" Text="START" Clicked="OnButtonClicked" />
     </Grid>

@@ -13,21 +13,23 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="image\captain.png" />
-    <None Remove="image\pirosuke.png" />
+    <None Remove="image\cap.png" />
+    <None Remove="image\piro.png" />
     <None Remove="image\plain.png" />
-    <None Remove="image\tencho.png" />
-    <None Remove="image\yuimarru.png" />
+    <None Remove="image\ten.png" />
+    <None Remove="image\yui.png" />
     <None Remove="image\zangi.png" />
+    <None Remove="image\zangi_p.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="image\captain.png" />
-    <EmbeddedResource Include="image\pirosuke.png" />
+    <EmbeddedResource Include="image\cap.png" />
+    <EmbeddedResource Include="image\piro.png" />
     <EmbeddedResource Include="image\plain.png" />
-    <EmbeddedResource Include="image\tencho.png" />
-    <EmbeddedResource Include="image\yuimarru.png" />
+    <EmbeddedResource Include="image\ten.png" />
+    <EmbeddedResource Include="image\yui.png" />
     <EmbeddedResource Include="image\zangi.png" />
+    <EmbeddedResource Include="image\zangi_p.png" />
   </ItemGroup>
 
   <ItemGroup>
