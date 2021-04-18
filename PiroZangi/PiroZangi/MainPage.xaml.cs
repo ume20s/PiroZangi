@@ -12,6 +12,7 @@ namespace PiroZangi
     {
         private int remain;                 // 残り時間
         private int score;                  // スコア
+        private int highscore;              // ハイスコア
         private int character;              // 出現キャラクタ
         private int interval;               // ザンギ出現間隔
         private int intervalcnt;            // 出現時間計数カウンタ
@@ -74,7 +75,7 @@ namespace PiroZangi
                             break;
                     }
                 }
-                scoreLabel.Text = "Score: " + score.ToString().PadLeft(5, '_');
+                scoreLabel.Text = "Score: " + score.ToString("####0");
             };
             for(i=0; i<9; i++) {
                 _images[i].GestureRecognizers.Add(gr);
@@ -130,6 +131,11 @@ namespace PiroZangi
                     }
                 } else { // 時間をオーバーしたらそれで試合終了ですよ
                     _images[alive].Source = ImageSource.FromResource("PiroZangi.image.plain.png");
+                    if(score > highscore)
+                    {
+                        highscore = score;
+                        highscoreLabel.Text = "HighScore: " + highscore.ToString("####0");
+                    }
                     countBtn.Text = "も う １ 回 ？";
                     running = false;
                     hit = false;
@@ -155,7 +161,7 @@ namespace PiroZangi
             intervalcnt = 0;
             alive = r.Next(0, 9);
             character = 0;
-            scoreLabel.Text = "Score: " + score.ToString().PadLeft(5, '_');
+            scoreLabel.Text = "Score: " + score.ToString("####0");
             _images[alive].Source = ImageSource.FromResource("PiroZangi.image.zangi.png");
             running = true;
         }
