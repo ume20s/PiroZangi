@@ -8,6 +8,7 @@ using Xamarin.Forms;
 
 namespace PiroZangi
 {
+    // メインルーチン
     public partial class MainPage : ContentPage
     {
         private int remain;                 // 残り時間
@@ -19,7 +20,7 @@ namespace PiroZangi
         private bool running;               // ゲームやってるよフラグ
         private int alive = 0;              // ザンギ出現穴番号
         private bool hit = false;           // 叩かれた？
-        private Image[] _images;            // イメージコントロール配列
+        private ExImage[] _images;            // イメージコントロール配列
         System.Random r = new System.Random();  // 乱数発生用変数
 
         public MainPage()
@@ -30,57 +31,55 @@ namespace PiroZangi
             running = false;
 
             // イメージ配列の格納
-            _images = new Image[9];
-            _images[0] = g0;
-            _images[1] = g1;
-            _images[2] = g2;
-            _images[3] = g3;
-            _images[4] = g4;
-            _images[5] = g5;
-            _images[6] = g6;
-            _images[7] = g7;
-            _images[8] = g8;
-
-            // イメージ画像の初期化
-            for(i=0; i<9; i++) {
+            Grid grid;
+            grid = g;
+            _images = new ExImage[9];
+            for (i=0; i<9; i++) {
+                _images[i] = new ExImage();
                 _images[i].Source = ImageSource.FromResource("PiroZangi.image.plain.png");
+                _images[i].BackgroundColor = Color.FromRgb(131, 225, 139);
+                _images[i].TabIndex = i;
+                grid.Children.Add(_images[i], i/3+1, i%3+1);
             }
 
             // タッチイベントの実装
-            var gr = new TapGestureRecognizer();
-            gr.Tapped += (sender, e) => {
-                if((((Image)sender).TabIndex == alive) && (hit == false)) {
-                    hit = true;
-                    switch(character) {
-                        case 0:     // ザンギの場合
-                            score += 100;
-                            _images[alive].Source = ImageSource.FromResource("PiroZangi.image.zangi_p.png");
-                            break;
-                        case 1:     // ピロ助の場合
-                            score -= 50;
-                            _images[alive].Source = ImageSource.FromResource("PiroZangi.image.piro_p.png");
-                            break;
-                        case 2:     // 店長の場合
-                            _images[alive].Source = ImageSource.FromResource("PiroZangi.image.ten_p.png");
-                            break;
-                        case 3:     // ゆいまーるの場合
-                            score -= 10000;
-                            _images[alive].Source = ImageSource.FromResource("PiroZangi.image.yui_p.png");
-                            break;
-                        case 4:     // キャプテンの場合
-                            score = 0;
-                            _images[alive].Source = ImageSource.FromResource("PiroZangi.image.cap_p.png");
-                            break;
-                        default:
-                            break;
+            for(i=0; i<9; i++)
+            {
+                _images[i].Down += (sender, a) => {
+                    if ((((ExImage)sender).TabIndex == alive) && (hit == false)) {
+                        hit = true;
+                        switch (character) {
+                            case 0:     // ザンギの場合
+                                score += 100;
+                                _images[alive].Source = ImageSource.FromResource("PiroZangi.image.zangi_p.png");
+                                break;
+                            case 1:     // ピロ助の場合
+                                score -= 50;
+                                _images[alive].Source = ImageSource.FromResource("PiroZangi.image.piro_p.png");
+                                break;
+                            case 2:     // 店長の場合
+                                score -= 0;
+                                _images[alive].Source = ImageSource.FromResource("PiroZangi.image.ten_p.png");
+                                break;
+                            case 3:     // ゆいまーるの場合
+                                score -= 10000;
+                                _images[alive].Source = ImageSource.FromResource("PiroZangi.image.yui_p.png");
+                                break;
+                            case 4:     // キャプテンの場合
+                                score = 0;
+                                _images[alive].Source = ImageSource.FromResource("PiroZangi.image.cap_p.png");
+                                break;
+                            default:
+                                break;
+                        }
                     }
-                }
-                scoreLabel.Text = "Score: " + score.ToString("####0");
-            };
-            for(i=0; i<9; i++) {
-                _images[i].GestureRecognizers.Add(gr);
+                    scoreLabel.Text = "Score: " + score.ToString("####0");
+                    if (score > highscore) {
+                        highscore = score;
+                        highscoreLabel.Text = "HighScore: " + highscore.ToString("####0");
+                    }
+                };
             }
-
 
             // タイマー処理
             Device.StartTimer(TimeSpan.FromMilliseconds(10), () =>
@@ -95,8 +94,7 @@ namespace PiroZangi
                 countBtn.Text = (remain / 100).ToString() + "." + (remain % 100).ToString("00");
 
                 // 時間内なら
-                if (remain > 0)
-                {
+                if (remain > 0) {
                     intervalcnt--;
                     if (intervalcnt <= 0)
                     {
@@ -107,7 +105,7 @@ namespace PiroZangi
 
                         // キャラクタ選択
                         character = r.Next(0, 100);
-                        if(character < 82) {
+                        if(character < 80) {
                             character = 0;
                             _images[alive].Source = ImageSource.FromResource("PiroZangi.image.zangi.png");
                         } else if(character < 87) {
@@ -116,7 +114,7 @@ namespace PiroZangi
                         } else if(character < 94) {
                             character = 2;
                             _images[alive].Source = ImageSource.FromResource("PiroZangi.image.ten.png");
-                        } else if(character < 99) {
+                        } else if(character < 98) {
                             character = 3;
                             _images[alive].Source = ImageSource.FromResource("PiroZangi.image.yui.png");
                         } else {
@@ -130,17 +128,13 @@ namespace PiroZangi
                         intervalcnt = interval;
                     }
                 } else { // 時間をオーバーしたらそれで試合終了ですよ
-                    _images[alive].Source = ImageSource.FromResource("PiroZangi.image.plain.png");
-                    if(score > highscore)
-                    {
-                        highscore = score;
-                        highscoreLabel.Text = "HighScore: " + highscore.ToString("####0");
+                    for(i=0; i < 9; i++) {
+                        _images[i].Source = ImageSource.FromResource("PiroZangi.image.plain.png");
                     }
                     countBtn.Text = "も う １ 回 ？";
                     running = false;
                     hit = false;
                 }
-
                 return true;
             });
         }

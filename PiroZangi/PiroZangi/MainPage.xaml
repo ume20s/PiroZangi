@@ -9,13 +9,10 @@
                 <Setter Property="TextColor" Value="#000000" />
                 <Setter Property="VerticalTextAlignment" Value="Center" />
             </Style>
-            <Style TargetType="Image">
-                <Setter Property="BackgroundColor" Value ="#83E18B" />
-            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid Margin="10">
+    <Grid Margin="10" x:Name="g">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.1*" />
             <ColumnDefinition Width="*" />
@@ -40,19 +37,10 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <Label x:Name="scoreLabel"  Grid.Row="0" Grid.Column="0" 
-                   FontSize="22" Margin="5" BackgroundColor="#FFA2E7" Text = " Score:    0" />
+                   FontSize="22" Margin="5" BackgroundColor="#FFA2E7" Text = " Score: 0" />
             <Label x:Name="highscoreLabel" Grid.Row="0" Grid.Column="1" 
-                   FontSize="16" Margin="5" BackgroundColor="#FFA2E7" Text = " HighScore:    0" />
+                   FontSize="16" Margin="5" BackgroundColor="#FFA2E7" Text = " HighScore: 0" />
         </Grid>
-        <Image Grid.Column="1" Grid.Row="1" x:Name="g0" TabIndex="0" />
-        <Image Grid.Column="2" Grid.Row="1" x:Name="g1" TabIndex="1" />
-        <Image Grid.Column="3" Grid.Row="1" x:Name="g2" TabIndex="2" />
-        <Image Grid.Column="1" Grid.Row="2" x:Name="g3" TabIndex="3" />
-        <Image Grid.Column="2" Grid.Row="2" x:Name="g4" TabIndex="4" />
-        <Image Grid.Column="3" Grid.Row="2" x:Name="g5" TabIndex="5" />
-        <Image Grid.Column="1" Grid.Row="3" x:Name="g6" TabIndex="6" />
-        <Image Grid.Column="2" Grid.Row="3" x:Name="g7" TabIndex="7" />
-        <Image Grid.Column="3" Grid.Row="3" x:Name="g8" TabIndex="8" />
         <Button Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3"
                 x:Name="countBtn" FontSize="22" Text="START" Clicked="OnButtonClicked" />
     </Grid>
