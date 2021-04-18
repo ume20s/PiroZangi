@@ -14,20 +14,28 @@
 
   <ItemGroup>
     <None Remove="image\cap.png" />
+    <None Remove="image\cap_p.png" />
     <None Remove="image\piro.png" />
+    <None Remove="image\piro_p.png" />
     <None Remove="image\plain.png" />
     <None Remove="image\ten.png" />
+    <None Remove="image\ten_p.png" />
     <None Remove="image\yui.png" />
+    <None Remove="image\yui_p.png" />
     <None Remove="image\zangi.png" />
     <None Remove="image\zangi_p.png" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="image\cap.png" />
+    <EmbeddedResource Include="image\cap_p.png" />
     <EmbeddedResource Include="image\piro.png" />
+    <EmbeddedResource Include="image\piro_p.png" />
     <EmbeddedResource Include="image\plain.png" />
     <EmbeddedResource Include="image\ten.png" />
+    <EmbeddedResource Include="image\ten_p.png" />
     <EmbeddedResource Include="image\yui.png" />
+    <EmbeddedResource Include="image\yui_p.png" />
     <EmbeddedResource Include="image\zangi.png" />
     <EmbeddedResource Include="image\zangi_p.png" />
   </ItemGroup>

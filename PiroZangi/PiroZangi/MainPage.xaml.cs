@@ -51,15 +51,30 @@ namespace PiroZangi
                 if((((Image)sender).TabIndex == alive) && (hit == false)) {
                     hit = true;
                     switch(character) {
-                        case 0:
+                        case 0:     // ザンギの場合
                             score += 100;
                             _images[alive].Source = ImageSource.FromResource("PiroZangi.image.zangi_p.png");
+                            break;
+                        case 1:     // ピロ助の場合
+                            score -= 50;
+                            _images[alive].Source = ImageSource.FromResource("PiroZangi.image.piro_p.png");
+                            break;
+                        case 2:     // 店長の場合
+                            _images[alive].Source = ImageSource.FromResource("PiroZangi.image.ten_p.png");
+                            break;
+                        case 3:     // ゆいまーるの場合
+                            score -= 10000;
+                            _images[alive].Source = ImageSource.FromResource("PiroZangi.image.yui_p.png");
+                            break;
+                        case 4:     // キャプテンの場合
+                            score = 0;
+                            _images[alive].Source = ImageSource.FromResource("PiroZangi.image.cap_p.png");
                             break;
                         default:
                             break;
                     }
                 }
-                scoreLabel.Text = "Score: " + score.ToString("00000");
+                scoreLabel.Text = "Score: " + score.ToString().PadLeft(5, '_');
             };
             for(i=0; i<9; i++) {
                 _images[i].GestureRecognizers.Add(gr);
@@ -136,10 +151,11 @@ namespace PiroZangi
             remain = 3000;
             score = 0;
             hit = false;
-            interval = 130;
+            interval = 132;
             intervalcnt = 0;
             alive = r.Next(0, 9);
             character = 0;
+            scoreLabel.Text = "Score: " + score.ToString().PadLeft(5, '_');
             _images[alive].Source = ImageSource.FromResource("PiroZangi.image.zangi.png");
             running = true;
         }
