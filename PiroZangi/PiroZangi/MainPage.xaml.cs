@@ -27,8 +27,21 @@ namespace PiroZangi
         {
             int i;                          // 有象無象
 
+            // おおもとの初期化
             InitializeComponent();
             running = false;
+
+            // 事前のハイスコア処理
+            var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+                             + "HighScore.txt";
+            if (System.IO.File.Exists(localAppData)) {
+                using (System.IO.StreamReader sr = new System.IO.StreamReader(localAppData)) {
+                    highscore = int.Parse(sr.ReadToEnd());
+                }
+            } else {
+                highscore = 0;
+            }
+            highscoreLabel.Text = " HighScore: " + highscore.ToString("####0");
 
             // イメージ配列の格納
             Grid grid;
@@ -73,6 +86,8 @@ namespace PiroZangi
                                 break;
                         }
                     }
+
+                    // スコアとハイスコア処理
                     scoreLabel.Text = "Score: " + score.ToString("####0");
                     if (score > highscore) {
                         highscore = score;
@@ -128,8 +143,8 @@ namespace PiroZangi
                         intervalcnt = interval;
                     }
                 } else { // 時間をオーバーしたらそれで試合終了ですよ
-                    for(i=0; i < 9; i++) {
-                        _images[i].Source = ImageSource.FromResource("PiroZangi.image.plain.png");
+                    using (System.IO.StreamWriter sw = new System.IO.StreamWriter(localAppData)) {
+                        sw.Write(highscore.ToString());
                     }
                     countBtn.Text = "も う １ 回 ？";
                     running = false;
@@ -148,6 +163,9 @@ namespace PiroZangi
             }
 
             // 走ってなかったらもろもろの初期値を設定して走る
+            for (int i = 0; i < 9; i++) {
+                _images[i].Source = ImageSource.FromResource("PiroZangi.image.plain.png");
+            }
             remain = 3000;
             score = 0;
             hit = false;
