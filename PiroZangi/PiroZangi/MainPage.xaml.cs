@@ -85,13 +85,12 @@ namespace PiroZangi
                             default:
                                 break;
                         }
-                    }
-
-                    // スコアとハイスコア処理
-                    scoreLabel.Text = "Score: " + score.ToString("####0");
-                    if (score > highscore) {
-                        highscore = score;
-                        highscoreLabel.Text = "HighScore: " + highscore.ToString("####0");
+                        // スコアとハイスコア処理
+                        scoreLabel.Text = "Score: " + score.ToString("####0");
+                        if (score > highscore) {
+                            highscore = score;
+                            highscoreLabel.Text = "HighScore: " + highscore.ToString("####0");
+                        }
                     }
                 };
             }
@@ -146,6 +145,7 @@ namespace PiroZangi
                     using (System.IO.StreamWriter sw = new System.IO.StreamWriter(localAppData)) {
                         sw.Write(highscore.ToString());
                     }
+                    _images[alive].Source = ImageSource.FromResource("PiroZangi.image.plain.png");
                     countBtn.Text = "も う １ 回 ？";
                     running = false;
                     hit = false;
