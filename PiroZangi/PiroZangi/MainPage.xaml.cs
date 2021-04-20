@@ -75,7 +75,7 @@ namespace PiroZangi
                                 _images[alive].Source = ImageSource.FromResource("PiroZangi.image.piro_p.png");
                                 break;
                             case 3:     // 店長の場合
-                                score -= 0;
+                                score -= 1;
                                 _images[alive].Source = ImageSource.FromResource("PiroZangi.image.ten_p.png");
                                 break;
                             case 4:     // ゆいまーるの場合
