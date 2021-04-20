@@ -66,19 +66,23 @@ namespace PiroZangi
                                 score += 100;
                                 _images[alive].Source = ImageSource.FromResource("PiroZangi.image.zangi_p.png");
                                 break;
-                            case 1:     // ピロ助の場合
+                            case 1:     // 青のりダーの場合
+                                score += 200;
+                                _images[alive].Source = ImageSource.FromResource("PiroZangi.image.aonori_p.png");
+                                break;
+                            case 2:     // ピロ助の場合
                                 score -= 50;
                                 _images[alive].Source = ImageSource.FromResource("PiroZangi.image.piro_p.png");
                                 break;
-                            case 2:     // 店長の場合
+                            case 3:     // 店長の場合
                                 score -= 0;
                                 _images[alive].Source = ImageSource.FromResource("PiroZangi.image.ten_p.png");
                                 break;
-                            case 3:     // ゆいまーるの場合
+                            case 4:     // ゆいまーるの場合
                                 score -= 10000;
                                 _images[alive].Source = ImageSource.FromResource("PiroZangi.image.yui_p.png");
                                 break;
-                            case 4:     // キャプテンの場合
+                            case 5:     // キャプテンの場合
                                 score = 0;
                                 _images[alive].Source = ImageSource.FromResource("PiroZangi.image.cap_p.png");
                                 break;
@@ -119,20 +123,23 @@ namespace PiroZangi
 
                         // キャラクタ選択
                         character = r.Next(0, 100);
-                        if(character < 80) {
+                        if(character < 70) {
                             character = 0;
                             _images[alive].Source = ImageSource.FromResource("PiroZangi.image.zangi.png");
-                        } else if(character < 87) {
+                        } else if (character < 80) {
                             character = 1;
+                            _images[alive].Source = ImageSource.FromResource("PiroZangi.image.aonori.png");
+                        } else if (character < 87) {
+                            character = 2;
                             _images[alive].Source = ImageSource.FromResource("PiroZangi.image.piro.png");
                         } else if(character < 94) {
-                            character = 2;
+                            character = 3;
                             _images[alive].Source = ImageSource.FromResource("PiroZangi.image.ten.png");
                         } else if(character < 98) {
-                            character = 3;
+                            character = 4;
                             _images[alive].Source = ImageSource.FromResource("PiroZangi.image.yui.png");
                         } else {
-                            character = 4;
+                            character = 5;
                             _images[alive].Source = ImageSource.FromResource("PiroZangi.image.cap.png");
                         }
 

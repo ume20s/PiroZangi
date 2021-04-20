@@ -13,6 +13,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="image\aonori.png" />
+    <None Remove="image\aonori_p.png" />
     <None Remove="image\cap.png" />
     <None Remove="image\cap_p.png" />
     <None Remove="image\piro.png" />
@@ -27,6 +29,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="image\aonori.png" />
+    <EmbeddedResource Include="image\aonori_p.png" />
     <EmbeddedResource Include="image\cap.png" />
     <EmbeddedResource Include="image\cap_p.png" />
     <EmbeddedResource Include="image\piro.png" />
