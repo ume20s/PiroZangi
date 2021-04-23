@@ -8,7 +8,13 @@ using Xamarin.Forms;
 
 namespace PiroZangi
 {
-    // メインルーチン
+    // 効果音再生のためのインターフェースの作成
+    public interface ISoundEffect
+    {
+        void SoundPlay();
+    }
+
+    // メインクラス
     public partial class MainPage : ContentPage
     {
         private int remain;                 // 残り時間
@@ -21,7 +27,12 @@ namespace PiroZangi
         private int alive = 0;              // ザンギ出現穴番号
         private bool hit = false;           // 叩かれた？
         private ExImage[] _images;            // イメージコントロール配列
-        System.Random r = new System.Random();  // 乱数発生用変数
+        
+        // 乱数発生用変数
+        System.Random r = new System.Random();
+
+        // 効果音再生のためのインターフェースの実装
+        ISoundEffect soundEffect = DependencyService.Get<ISoundEffect>();
 
         public MainPage()
         {
@@ -65,6 +76,9 @@ namespace PiroZangi
                             case 0:     // ザンギの場合
                                 score += 100;
                                 _images[alive].Source = ImageSource.FromResource("PiroZangi.image.zangi_p.png");
+                                using (soundEffect as IDisposable) {
+                                    soundEffect.SoundPlay();
+                                }
                                 break;
                             case 1:     // 青のりダーの場合
                                 score += 200;
