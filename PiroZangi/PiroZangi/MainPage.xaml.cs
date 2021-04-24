@@ -11,7 +11,7 @@ namespace PiroZangi
     // 効果音再生のためのインターフェースの作成
     public interface ISoundEffect
     {
-        void SoundPlay();
+        void SoundPlay(int c);
     }
 
     // メインクラス
@@ -41,6 +41,11 @@ namespace PiroZangi
             // おおもとの初期化
             InitializeComponent();
             running = false;
+
+            // 開始の効果音
+            using (soundEffect as IDisposable) {
+                soundEffect.SoundPlay(6);
+            }
 
             // 事前のハイスコア処理
             var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
@@ -72,13 +77,15 @@ namespace PiroZangi
                 _images[i].Down += (sender, a) => {
                     if ((((ExImage)sender).TabIndex == alive) && (hit == false)) {
                         hit = true;
+                        // 効果音
+                        using (soundEffect as IDisposable) {
+                            soundEffect.SoundPlay(character);
+                        }
+                        // キャラクタに応じてグラフィックを変更
                         switch (character) {
                             case 0:     // ザンギの場合
                                 score += 100;
                                 _images[alive].Source = ImageSource.FromResource("PiroZangi.image.zangi_p.png");
-                                using (soundEffect as IDisposable) {
-                                    soundEffect.SoundPlay();
-                                }
                                 break;
                             case 1:     // 青のりダーの場合
                                 score += 200;
@@ -103,6 +110,7 @@ namespace PiroZangi
                             default:
                                 break;
                         }
+
                         // スコアとハイスコア処理
                         scoreLabel.Text = "Score: " + score.ToString("####0");
                         if (score > highscore) {
@@ -114,8 +122,7 @@ namespace PiroZangi
             }
 
             // タイマー処理
-            Device.StartTimer(TimeSpan.FromMilliseconds(10), () =>
-            {
+            Device.StartTimer(TimeSpan.FromMilliseconds(10), () => {
                 // 走ってなきゃ処理しない
                 if (running == false) {
                     return true;
@@ -163,9 +170,15 @@ namespace PiroZangi
                         intervalcnt = interval;
                     }
                 } else { // 時間をオーバーしたらそれで試合終了ですよ
+                    // 終了の効果音
+                    using (soundEffect as IDisposable) {
+                        soundEffect.SoundPlay(6);
+                    }
+                    // ハイスコアの保存
                     using (System.IO.StreamWriter sw = new System.IO.StreamWriter(localAppData)) {
                         sw.Write(highscore.ToString());
                     }
+                    // 穴を元に戻してリプレイ確認
                     _images[alive].Source = ImageSource.FromResource("PiroZangi.image.plain.png");
                     countBtn.Text = "も う １ 回 ？";
                     running = false;
