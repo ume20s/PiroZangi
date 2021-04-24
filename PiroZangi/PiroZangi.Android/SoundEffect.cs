@@ -8,12 +8,12 @@ namespace PiroZangi.Droid
     class SoundEffect : ISoundEffect
     {
         SoundPool soundPool;
-        int[] soundPoolId = new int[7];
+        int[] soundPoolId = new int[8];
 
         // もろもろの初期化とファイルの読み込み
         public SoundEffect()
         {
-            int SOUND_POOL_MAX = 9;
+            int SOUND_POOL_MAX = 8;
 
             AudioAttributes attr = new AudioAttributes.Builder()
                 .SetUsage(AudioUsageKind.Media)
@@ -30,6 +30,7 @@ namespace PiroZangi.Droid
             soundPoolId[4] = soundPool.Load(Android.App.Application.Context, Resource.Raw.ten, 1);
             soundPoolId[5] = soundPool.Load(Android.App.Application.Context, Resource.Raw.yui, 1);
             soundPoolId[6] = soundPool.Load(Android.App.Application.Context, Resource.Raw.cap, 1);
+            soundPoolId[7] = soundPool.Load(Android.App.Application.Context, Resource.Raw.gameover, 1);
         }
 
         // 効果音の再生
