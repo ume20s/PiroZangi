@@ -167,7 +167,7 @@ namespace PiroZangi
                 } else { // 時間をオーバーしたらそれで試合終了ですよ
                     // 終了の効果音
                     using (soundEffect as IDisposable) {
-                        soundEffect.SoundPlay(6);
+                        soundEffect.SoundPlay(0);
                     }
                     // ハイスコアの保存
                     using (System.IO.StreamWriter sw = new System.IO.StreamWriter(localAppData)) {

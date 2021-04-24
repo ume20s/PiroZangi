@@ -13282,19 +13282,22 @@ namespace PiroZangi.Droid
 			public const int cap = 2131623937;
 			
 			// aapt resource value: 0x7F0E0002
-			public const int piro = 2131623938;
+			public const int gameover = 2131623938;
 			
 			// aapt resource value: 0x7F0E0003
-			public const int pirozangi = 2131623939;
+			public const int piro = 2131623939;
 			
 			// aapt resource value: 0x7F0E0004
-			public const int ten = 2131623940;
+			public const int pirozangi = 2131623940;
 			
 			// aapt resource value: 0x7F0E0005
-			public const int yui = 2131623941;
+			public const int ten = 2131623941;
 			
 			// aapt resource value: 0x7F0E0006
-			public const int zangi = 2131623942;
+			public const int yui = 2131623942;
+			
+			// aapt resource value: 0x7F0E0007
+			public const int zangi = 2131623943;
 			
 			static Raw()
 			{

@@ -13,7 +13,7 @@ namespace PiroZangi.Droid
         // もろもろの初期化とファイルの読み込み
         public SoundEffect()
         {
-            int SOUND_POOL_MAX = 8;
+            int SOUND_POOL_MAX = 9;
 
             AudioAttributes attr = new AudioAttributes.Builder()
                 .SetUsage(AudioUsageKind.Media)
