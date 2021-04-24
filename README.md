@@ -24,7 +24,7 @@ Special thanks:
 
 ピロスクルーのグラフィックは み～太郎（ @masaru38_yakumo ）さんの娘さんの ぽてT さんに描いていただきました
 
-開始音声は ゆいまーる姫( @yuimarru_sweets ) さんのお声を使わせていただきました
+開始音声は ゆいまーる姫( @yuimarru_sweets ) 様のお声を使わせていただきました
 
 ゲームBGMは NAK( @NakSpector ) さんの作られたものを使わせていただきました
 
