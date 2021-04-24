@@ -42,11 +42,6 @@ namespace PiroZangi
             InitializeComponent();
             running = false;
 
-            // 開始の効果音
-            using (soundEffect as IDisposable) {
-                soundEffect.SoundPlay(6);
-            }
-
             // 事前のハイスコア処理
             var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
                              + "HighScore.txt";
@@ -79,7 +74,7 @@ namespace PiroZangi
                         hit = true;
                         // 効果音
                         using (soundEffect as IDisposable) {
-                            soundEffect.SoundPlay(character);
+                            soundEffect.SoundPlay(character + 1);
                         }
                         // キャラクタに応じてグラフィックを変更
                         switch (character) {
@@ -186,6 +181,12 @@ namespace PiroZangi
                 }
                 return true;
             });
+
+            // 開始の効果音
+            using (soundEffect as IDisposable)
+            {
+                soundEffect.SoundPlay(0);
+            }
         }
 
         // ゲーム開始ボタン
