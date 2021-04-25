@@ -30,7 +30,7 @@ namespace PiroZangi.Droid
             soundPoolId[4] = soundPool.Load(Android.App.Application.Context, Resource.Raw.ten, 1);
             soundPoolId[5] = soundPool.Load(Android.App.Application.Context, Resource.Raw.yui, 1);
             soundPoolId[6] = soundPool.Load(Android.App.Application.Context, Resource.Raw.cap, 1);
-            soundPoolId[7] = soundPool.Load(Android.App.Application.Context, Resource.Raw.gameover, 1);
+            soundPoolId[7] = soundPool.Load(Android.App.Application.Context, Resource.Raw.bgm4, 1);
         }
 
         // 効果音の再生

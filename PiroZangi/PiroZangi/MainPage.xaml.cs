@@ -14,6 +14,13 @@ namespace PiroZangi
         void SoundPlay(int c);
     }
 
+    // ＢＧＭ再生のためのインターフェースの作成
+    public interface IMediaPlayer
+    {
+        Task PlayAsync(string title);
+        void Stop();
+    }
+
     // メインクラス
     public partial class MainPage : ContentPage
     {
@@ -165,6 +172,9 @@ namespace PiroZangi
                         intervalcnt = interval;
                     }
                 } else { // 時間をオーバーしたらそれで試合終了ですよ
+                    // ＢＧＭストップ
+                    DependencyService.Get<IMediaPlayer>().Stop();
+
                     // 終了の効果音
                     using (soundEffect as IDisposable) {
                         soundEffect.SoundPlay(7);
@@ -211,6 +221,7 @@ namespace PiroZangi
             scoreLabel.Text = "Score: " + score.ToString("####0");
             _images[alive].Source = ImageSource.FromResource("PiroZangi.image.zangi.png");
             running = true;
+            DependencyService.Get<IMediaPlayer>().PlayAsync("bgm2");
         }
     }
 }
