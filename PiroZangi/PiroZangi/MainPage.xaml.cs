@@ -221,7 +221,7 @@ namespace PiroZangi
             scoreLabel.Text = "Score: " + score.ToString("####0");
             _images[alive].Source = ImageSource.FromResource("PiroZangi.image.zangi.png");
             running = true;
-            DependencyService.Get<IMediaPlayer>().PlayAsync("bgm2");
+            DependencyService.Get<IMediaPlayer>().PlayAsync("bgm");
         }
     }
 }
