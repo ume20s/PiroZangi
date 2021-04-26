@@ -9,7 +9,6 @@ namespace PiroZangi
         public App()
         {
             InitializeComponent();
-
             MainPage = new MainPage();
         }
 
@@ -19,6 +18,7 @@ namespace PiroZangi
 
         protected override void OnSleep()
         {
+            System.Diagnostics.Process.GetCurrentProcess().CloseMainWindow();
         }
 
         protected override void OnResume()

@@ -19,7 +19,7 @@ namespace PiroZangi.Droid
                     player = new MediaPlayer();
                     player.SetAudioStreamType(Stream.Music);
                     player = MediaPlayer.Create(global::Android.App.Application.Context, resourceId);
-                    player.Looping = true;
+                    player.Looping = false;
                     player.Start();
                 } else {
                     if (player.IsPlaying == true) {
@@ -39,6 +39,22 @@ namespace PiroZangi.Droid
                 }
                 player.Release();
                 player = null;
+            }
+        }
+
+        public void Restart()
+        {
+            if ((player != null)) {
+                player.Start();
+            }
+        }
+
+        public void Pause()
+        {
+            if ((player != null)) {
+                if (player.IsPlaying) {
+                    player.Pause();
+                }
             }
         }
 

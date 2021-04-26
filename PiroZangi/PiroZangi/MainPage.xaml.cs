@@ -33,7 +33,8 @@ namespace PiroZangi
         private bool running;               // ゲームやってるよフラグ
         private int alive = 0;              // ザンギ出現穴番号
         private bool hit = false;           // 叩かれた？
-        private ExImage[] _images;            // イメージコントロール配列
+        private ExImage[] _images;          // イメージコントロール配列
+        public bool isSleep;                // スリープフラグ
         
         // 乱数発生用変数
         System.Random r = new System.Random();
@@ -48,6 +49,7 @@ namespace PiroZangi
             // おおもとの初期化
             InitializeComponent();
             running = false;
+            isSleep = false;
 
             // 事前のハイスコア処理
             var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
@@ -137,8 +139,7 @@ namespace PiroZangi
                 // 時間内なら
                 if (remain > 0) {
                     intervalcnt--;
-                    if (intervalcnt <= 0)
-                    {
+                    if (intervalcnt <= 0) {
                         // 穴を戻して次の出現場所を選択
                         _images[alive].Source = ImageSource.FromResource("PiroZangi.image.plain.png");
                         hit = false;
@@ -172,13 +173,12 @@ namespace PiroZangi
                         intervalcnt = interval;
                     }
                 } else { // 時間をオーバーしたらそれで試合終了ですよ
-                    // ＢＧＭストップ
+                    // 終了ＢＧＭ
                     DependencyService.Get<IMediaPlayer>().Stop();
-
-                    // 終了の効果音
                     using (soundEffect as IDisposable) {
                         soundEffect.SoundPlay(7);
                     }
+
                     // ハイスコアの保存
                     using (System.IO.StreamWriter sw = new System.IO.StreamWriter(localAppData)) {
                         sw.Write(highscore.ToString());
